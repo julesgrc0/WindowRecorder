@@ -24,14 +24,14 @@ namespace WindowRecorder
                 {
                     new Thread(() =>
                     {
-                        RecordProcess rec = new RecordProcess(process.MainWindowHandle, @"C:\Users\jules\OneDrive\Images\Pellicule", process.Id.ToString());
+                        RecordProcess rec = new RecordProcess(process.MainWindowHandle,  Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), process.Id.ToString());
                         rec.Start();
                         Thread.Sleep(5000);
                         rec.Stop();
                     }).Start();
 
                     Bitmap bmp = ProcessContent.GetWindowContent(process.MainWindowHandle);
-                    bmp.Save(@"C:\Users\jules\OneDrive\Images\Pellicule\" + process.Id + ".bmp");
+                    bmp.Save(Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),process.Id+".bmp"));
                 }
             }
 
